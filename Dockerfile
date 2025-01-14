@@ -1,21 +1,16 @@
-# let's use node 18.x  on Debian 11 ("bullseye")    see  https://hub.docker.com/_/node
-FROM node:18-bullseye
+FROM node:18-alpine
 
-# Create app directories
-RUN mkdir -p /usr/src/poinz/public
-RUN mkdir -p /usr/src/poinz/src
+COPY ./ /usr/src/poinz
+
 WORKDIR /usr/src/poinz
 
-# Bundle app source
-COPY deploy/public /usr/src/poinz/public
-COPY deploy/src /usr/src/poinz/src
-COPY deploy/package.json /usr/src/poinz/
-COPY deploy/package-lock.json /usr/src/poinz/
+RUN apk add git && \
+    cd /usr/src/poinz && \
+    npm install && \
+    npm run build && \
+    cp -r deploy/* ./ && \
+    npm install --omit=dev
 
-# install app dependencies
-RUN npm install --omit=dev
-
-# expose port 3000
 EXPOSE 3000
 
 CMD npm start
