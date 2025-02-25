@@ -1,6 +1,6 @@
-FROM node:22-alpine
+FROM node:22-bookworm
 
-RUN apk add git
+RUN apt install git
 
 COPY ./ /usr/src/poinz
 
@@ -20,4 +20,4 @@ RUN cd /usr/src/poinz && \
 
 EXPOSE 3000
 
-CMD npm start
+CMD ["npm", "start"]
