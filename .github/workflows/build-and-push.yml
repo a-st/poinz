@@ -1,0 +1,91 @@
+name: Build and Push Docker Image
+
+on:
+  workflow_call:
+    inputs:
+      push_image:
+        description: 'Whether to push the Docker image'
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Run dependency check
+        run: npm run dependencyCheck
+
+      - name: Run all tests
+        run: npm test
+
+      - name: Run prebuild checks
+        run: |
+          npm run docu
+          node build/checkTranslationKeys.mjs
+
+      - name: Build client
+        working-directory: client
+        env:
+          VITE_PUBLIC_POSTHOG_KEY: ${{ vars.VITE_PUBLIC_POSTHOG_KEY }}
+          VITE_PUBLIC_POSTHOG_HOST: ${{ vars.VITE_PUBLIC_POSTHOG_HOST }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install server dependencies
+        working-directory: server
+        run: npm ci
+
+      - name: Log in to GitHub Container Registry
+        if: inputs.push_image
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get git info
+        id: git-info
+        run: |
+          echo "branch=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_OUTPUT
+          echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "tags=$(git tag --points-at HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Build and tag Docker image
+        env:
+          DOCKER_REGISTRY: ghcr.io
+          DOCKER_USERNAME: ${{ github.repository_owner }}
+        run: |
+          DOCKER_USER="${DOCKER_USERNAME,,}"
+          BASE_TAG="$DOCKER_REGISTRY/$DOCKER_USER/poinz"
+          
+          # Build with all tags
+          TAGS_ARG="-t $BASE_TAG:latest"
+          if [ ! -z "${{ steps.git-info.outputs.tags }}" ]; then
+            for tag in ${{ steps.git-info.outputs.tags }}; do
+              TAGS_ARG="$TAGS_ARG -t $BASE_TAG:$tag"
+            done
+          fi
+          
+          echo "Building docker image for commit ${{ steps.git-info.outputs.hash }} on branch ${{ steps.git-info.outputs.branch }}"
+          docker build $TAGS_ARG --network=host .
+
+      - name: Push Docker image
+        if: inputs.push_image
+        env:
+          DOCKER_USERNAME: ${{ github.repository_owner }}
+        run: |
+          docker image push --all-tags "ghcr.io/${DOCKER_USERNAME,,}/poinz" 

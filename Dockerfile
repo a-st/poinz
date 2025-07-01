@@ -4,7 +4,7 @@ RUN apt install git
 
 COPY ./ /usr/src/poinz
 
-WORKDIR /usr/src/poinz
+WORKDIR /usr/src/poinz/server
 
 RUN cd /usr/src/poinz && \
     rm -rf .git && \
@@ -14,9 +14,11 @@ RUN cd /usr/src/poinz && \
     git add . && \
     git commit -m "Initial commit" && \
     npm install && \
-    npm run build && \
-    cp -r deploy/* ./ && \
-    npm install --omit=dev
+    (cd client && npm run build) && \
+    mv client/dist /usr/src/poinz/server/public && \
+    rm -rf client node_modules
+
+ENV NODE_ENV=production
 
 EXPOSE 3000
 
