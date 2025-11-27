@@ -1,6 +1,14 @@
 FROM node:22-bookworm
 
-RUN apt install git
+RUN apt -y update && \
+    apt -y install git supervisor pip
+
+RUN pip install --break-system-packages \
+        pip \
+        setuptools
+
+RUN pip install --break-system-packages \
+        supervisord-dependent-startup
 
 COPY ./ /usr/src/poinz
 
@@ -16,10 +24,14 @@ RUN cd /usr/src/poinz && \
     npm install && \
     (cd client && npm run build) && \
     mv client/dist /usr/src/poinz/server/public && \
-    rm -rf client node_modules
+    rm -rf client node_modules && \
+    mkdir -p /etc/supervisor/conf.d/
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ENV NODE_ENV=production
+ENV KEEPALIVE_URL=http://localhost:3000
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
