@@ -24,7 +24,7 @@
     "@mermaid-js/mermaid-cli": "^10.9.1",
     "chalk": "^5.6.2",
     "cross-spawn": "7.0.3",
-    "del": "7.1.0",
+    "del": "8.0.1",
     "ejs": "^3.1.10",
     "fs-extra": "11.1.1",
     "glob": "^13.0.0",
