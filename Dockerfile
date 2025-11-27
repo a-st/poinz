@@ -31,6 +31,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ENV NODE_ENV=production
 ENV KEEPALIVE_URL=http://localhost:3000
+ENV KEEPALIVE_TIMEOUT=15m
 
 EXPOSE 3000
 
