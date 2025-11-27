@@ -1,4 +1,4 @@
-FROM node:24-bookworm
+FROM node:25-bookworm
 
 RUN apt -y update && \
     apt -y install git supervisor pip
