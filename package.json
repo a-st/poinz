@@ -20,7 +20,7 @@
     "docu:diagrams": "node docu/src/docuGenerator.mjs -- diagrams"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.2",
+    "@babel/core": "^7.28.5",
     "chalk": "^5.3.0",
     "cross-spawn": "7.0.3",
     "del": "7.1.0",
