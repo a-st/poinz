@@ -28,7 +28,7 @@
     "ejs": "^4.0.1",
     "fs-extra": "11.3.3",
     "glob": "^13.0.4",
-    "npm-check-updates": "19.3.2",
+    "npm-check-updates": "19.6.3",
     "prettier": "3.8.1"
   },
   "engines": {
