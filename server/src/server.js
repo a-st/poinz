@@ -35,8 +35,11 @@ async function startup() {
 
   const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-  // Apply rate limiting
-  app.use(rateLimit());
+  // Apply rate limiting to 1000 per minute
+  app.use(rateLimit({
+    windowMs: 1 * 60 * 1000,
+    limit: 1000,
+  }));
 
   // serve static client files
   app.use(express.static(path.resolve(__dirname, '../public')));
