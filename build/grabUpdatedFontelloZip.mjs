@@ -1,15 +1,12 @@
 import path from 'path';
-import util from 'util';
 import fs from 'fs-extra';
-import {exec} from 'child_process';
+import {execFileSync} from 'child_process';
 import {deleteAsync} from 'del';
 import {fileURLToPath} from 'url';
 
-const execPromised = util.promisify(exec);
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const POINZ_CLIENT_FONT_DIR = path.resolve(__dirname, '../client/app/assets/font');
+const POINZ_CLIENT_FONT_DIR = path.resolve(__dirname, '../client/src/assets/font');
 
 grab(process.argv[2])
   .then(() => process.exit(0))
@@ -40,7 +37,7 @@ async function grab(inputZipFile) {
       `Target fontello directory "${targetExtractedFontelloDirname}" already exists... We wil copy files from there...!`
     );
   } else {
-    await execPromised(`unzip ${path.basename(absoluteFile)}`, {cwd: parentDir});
+    execFileSync('unzip', [path.basename(absoluteFile)], {cwd: parentDir});
     console.log('extracted');
   }
 
