@@ -5,13 +5,14 @@ import http from 'http';
 import * as url from 'url';
 import express from 'express';
 import sslifyEnforce from 'express-sslify';
+import {rateLimit} from 'express-rate-limit';
 
 import settings from './settings.js';
 import socketServer from './socketServer.js';
 import getLogger from './getLogger.js';
 import restApiFactory from './restApi/rest.js';
 import roomsStoreFactory from './store/roomStoreFactory.js';
-import { shutdownAnalytics } from './analytics.js';
+import {shutdownAnalytics} from './analytics.js';
 
 const LOGGER = getLogger('server');
 
@@ -33,6 +34,9 @@ async function startup() {
   restApiFactory(app, store);
 
   const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+  // Apply rate limiting
+  app.use(rateLimit());
 
   // serve static client files
   app.use(express.static(path.resolve(__dirname, '../public')));

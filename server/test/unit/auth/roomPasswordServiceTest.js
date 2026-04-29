@@ -5,7 +5,7 @@ test('get hashed password with key', () => {
 
   expect(hashed.hash).toBeDefined();
   expect(hashed.salt).toBeDefined();
-  expect(hashed.salt.length).toBe(12);
+  expect(hashed.salt.length).toBe(29);
 });
 
 test('check password match', () => {

@@ -1,6 +1,4 @@
-import crypto from 'crypto';
-
-import generateSafeRandomHexString from './generateSafeRandomHexString.js';
+import bcrypt from 'bcrypt';
 
 /**
  * Checks whether the given cleartext password generates the same hash as the one that is provided.
@@ -11,9 +9,8 @@ import generateSafeRandomHexString from './generateSafeRandomHexString.js';
  * @return {boolean} Returns true, if the given cleartextPassword generates the same hash. false otherwise.
  */
 export function checkRoomPassword(cleartextPassword, hash, key) {
-  const hashed = crypto.createHmac('sha512', key);
-  const recreatedHash = hashed.update(cleartextPassword).digest('hex');
-  return recreatedHash === hash;
+  const recreatedHash = bcrypt.hashSync(cleartextPassword, key);
+  return hash === recreatedHash;
 }
 
 /**
@@ -22,8 +19,7 @@ export function checkRoomPassword(cleartextPassword, hash, key) {
  * @return {{salt: string, hash: string}}
  */
 export function hashRoomPassword(cleartextPassword) {
-  const key = generateSafeRandomHexString();
-  const hashed = crypto.createHmac('sha512', key);
-  const hash = hashed.update(cleartextPassword).digest('hex');
-  return {salt: key, hash};
+  const salt = bcrypt.genSaltSync();
+  const hash = bcrypt.hashSync(cleartextPassword, salt);
+  return {salt, hash};
 }
