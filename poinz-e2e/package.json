@@ -26,5 +26,8 @@
   },
   "dependencies": {
     "socket.io-client": "4.7.2"
+  },
+  "overrides": {
+    "uuid": "^14.0.0"
   }
 }
