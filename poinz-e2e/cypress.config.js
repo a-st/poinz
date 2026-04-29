@@ -1,6 +1,7 @@
 const {defineConfig} = require('cypress');
 
 module.exports = defineConfig({
+  allowCypressEnv: false,
   video: false,
   viewportWidth: 1500,
   viewportHeight: 900,
