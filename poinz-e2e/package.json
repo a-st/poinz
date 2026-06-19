@@ -17,17 +17,20 @@
   ],
   "license": "ISC",
   "engines": {
-    "node": ">=24"
+    "node": ">=26"
   },
   "devDependencies": {
-    "cypress": "^15.14.1",
-    "nanoid": "^5.1.6",
-    "typescript": "^5.9.3"
+    "cypress": "^15.17.0",
+    "nanoid": "^5.1.14",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "socket.io-client": "4.8.3"
+    "socket.io-client": "^4.8.3"
   },
   "overrides": {
     "uuid": "^14.0.0"
+  },
+  "allowScripts": {
+    "cypress": true
   }
 }
