@@ -1,9 +1,10 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel'
 import packageInformation from './package.json';
 import {parseChangelogMd} from './viteConfig/parseChangelogMd';
 import {getGitInformation} from './viteConfig/getGitInformation';
-import {babel} from './viteConfig/babelConfig';
+import {babel as babelConfig} from './viteConfig/babelConfig';
 
 // https://vite.dev/config/
 export default defineConfig(({mode}) => {
@@ -34,6 +35,6 @@ export default defineConfig(({mode}) => {
         '/socket.io': 'http://localhost:3000'
       }
     },
-    plugins: [react({babel})]
+    plugins: [react(), babel(babelConfig)]
   };
 });
