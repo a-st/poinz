@@ -28,8 +28,8 @@ const Backlog = () => {
 
   const backlogShown = useSelector(isBacklogShown);
   const backlogWidth = useSelector(getBacklogWidth);
-  const trashedStoriesCount = useSelector(state => getTrashedStories(state).length);
-  const activeStoriesCount = useSelector(state => getActiveStories(state).length);
+  const trashedStoriesCount = useSelector((state) => getTrashedStories(state).length);
+  const activeStoriesCount = useSelector((state) => getActiveStories(state).length);
 
   const [showTrash, setShowTrash] = useState(false);
 

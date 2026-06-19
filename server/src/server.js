@@ -36,16 +36,18 @@ async function startup() {
   const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
   // Apply rate limiting to 1000 per minute
-  app.use(rateLimit({
-    windowMs: 1 * 60 * 1000,
-    limit: 1000,
-  }));
+  app.use(
+    rateLimit({
+      windowMs: 1 * 60 * 1000,
+      limit: 1000
+    })
+  );
 
   // serve static client files
   app.use(express.static(path.resolve(__dirname, '../public')));
 
   // enable html5 history mode by "forwarding" every unmatched route to the index.html file
-  app.get('*', (request, response) =>
+  app.get(/.*/, (request, response) =>
     response.sendFile(path.resolve(__dirname, '../public/index.html'))
   );
 

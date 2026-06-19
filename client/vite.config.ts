@@ -1,6 +1,6 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
-import babel from '@rolldown/plugin-babel'
+import babel from '@rolldown/plugin-babel';
 import packageInformation from './package.json';
 import {parseChangelogMd} from './viteConfig/parseChangelogMd';
 import {getGitInformation} from './viteConfig/getGitInformation';

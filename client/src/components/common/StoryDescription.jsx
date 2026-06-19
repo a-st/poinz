@@ -17,7 +17,7 @@ const StoryDescription = ({
   scroll = true
 }) => {
   const dispatch = useDispatch();
-  const markdownEnabled = useSelector(state => state.ui.markdownEnabled);
+  const markdownEnabled = useSelector((state) => state.ui.markdownEnabled);
   const handleToggleMarkdownEnabled = () => dispatch(toggleMarkdownEnabled());
 
   const [textExpanded, setTextExpanded] = useState(false);

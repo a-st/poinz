@@ -1,7 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
-import babel from '@babel/core';
+import * as babel from '@babel/core';
+import traverse from '@babel/traverse';
 import vm from 'vm';
 
 export default gatherData;
@@ -43,7 +44,7 @@ async function handleSingleCmdHandlerFile(filePath) {
 
   cmdHandlerInfo.description = getFirstBlockComment(result);
 
-  babel.traverse(result, {
+  traverse(result, {
     // Find all calls to pushEvent(...) and extract name of event
     CallExpression: function ({node}) {
       const {callee, arguments: args, loc} = node;
@@ -184,7 +185,7 @@ function getEventListFromCmdHandlers(commandHandlerInfo) {
 async function getListOfCommandHandlerFiles(cmdHandlersDirPath) {
   const {result} = await parseFile(path.join(cmdHandlersDirPath, 'commandHandlers.js'));
   const imports = [];
-  babel.traverse(result, {
+  traverse(result, {
     ImportDeclaration: (nodePath) => {
       imports.push(nodePath.node.source.value);
     }

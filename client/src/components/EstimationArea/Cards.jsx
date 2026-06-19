@@ -16,7 +16,7 @@ import ConfidenceButtons from './ConfidenceButtons';
  */
 const Cards = () => {
   const dispatch = useDispatch();
-  const withConfidence = useSelector(state => state.room.withConfidence);
+  const withConfidence = useSelector((state) => state.room.withConfidence);
   const cardConfig = useSelector(getCardConfigInOrder);
   const ownEstimate = useSelector(getOwnEstimate);
 

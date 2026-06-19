@@ -5,7 +5,7 @@
  *
  */
 import {getMatchingStoryOrThrow} from './commonPreconditions.js';
-import { trackEvent } from '../analytics.js';
+import {trackEvent} from '../analytics.js';
 
 const schema = {
   allOf: [

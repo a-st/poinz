@@ -35,11 +35,13 @@ const EstimationMatrix = () => {
   const dispatch = useDispatch();
   const {t} = useContext(L10nContext);
 
-  const includeTrashedStories = useSelector(state => state.ui.matrixIncludeTrashedStories);
-  const unestimatedStories = useSelector(state => 
-    includeTrashedStories ? getAllStoriesWithoutConsensus(state) : getActiveStoriesWithoutConsensus(state)
+  const includeTrashedStories = useSelector((state) => state.ui.matrixIncludeTrashedStories);
+  const unestimatedStories = useSelector((state) =>
+    includeTrashedStories
+      ? getAllStoriesWithoutConsensus(state)
+      : getActiveStoriesWithoutConsensus(state)
   );
-  const estimatedStories = useSelector(state =>
+  const estimatedStories = useSelector((state) =>
     includeTrashedStories ? getAllStoriesWithConsensus(state) : getActiveStoriesWithConsensus(state)
   );
   const cardConfig = useSelector(getCardConfigInOrder);

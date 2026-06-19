@@ -22,11 +22,11 @@ const Main = () => {
   const userCount = useSelector(getUserCount);
   const ownUserId = useSelector(getOwnUserId);
   const roomDataIsLoaded = roomId && userCount > 0 && !!ownUserId;
-  
+
   const joinUserdata = useSelector(getJoinUserdata);
   const joinRoomId = useSelector(getJoinRoomId);
   const failedAuth = useSelector(hasJoinFailedAuth);
-  const pathname = useSelector(state => state.ui.pathname);
+  const pathname = useSelector((state) => state.ui.pathname);
   const isAppStatusUrlPath = getNormalizedRoomId(pathname) === appConfig.APP_STATUS_IDENTIFIER;
 
   if (isAppStatusUrlPath) {

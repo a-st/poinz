@@ -28,11 +28,14 @@ export const OpenFileDialogContext = createContext(() => {});
 const BacklogFileDropWrapper = ({children}) => {
   const dispatch = useDispatch();
 
-  const onDrop = useCallback((acceptedFiles) => {
-    if (acceptedFiles?.length > 0) {
-      dispatch(importCsvFile(acceptedFiles[0]));
-    }
-  }, [dispatch]);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      if (acceptedFiles?.length > 0) {
+        dispatch(importCsvFile(acceptedFiles[0]));
+      }
+    },
+    [dispatch]
+  );
 
   const {getRootProps, isDragActive, isDragAccept, isDragReject, open} = useDropzone({
     onDrop,

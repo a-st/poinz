@@ -28,11 +28,13 @@ const User = ({user}) => {
   const estimationsForStory = useSelector(getEstimationsForCurrentlySelectedStory);
   const userEstimation = estimationsForStory && estimationsForStory[user.id];
   const userHasEstimation = userEstimation !== undefined;
-  const matchingCardConfig = useSelector(state => 
+  const matchingCardConfig = useSelector((state) =>
     userHasEstimation ? getMatchingCardConfig(state, userEstimation.value) : {}
   );
   const ownUserId = useSelector(getOwnUserId);
-  const selectedStory = useSelector(state => isAStorySelected(state) ? getSelectedStory(state) : undefined);
+  const selectedStory = useSelector((state) =>
+    isAStorySelected(state) ? getSelectedStory(state) : undefined
+  );
 
   const isOwnUser = user.id === ownUserId;
   const isExcluded = user.excluded;
@@ -76,7 +78,11 @@ const User = ({user}) => {
           ></StyledEyeIcon>
 
           {!isOwnUser && (
-            <i className="icon-logout" onClick={() => handleKick(user.id)} title={t('kickUser')}></i>
+            <i
+              className="icon-logout"
+              onClick={() => handleKick(user.id)}
+              title={t('kickUser')}
+            ></i>
           )}
         </StyledUserQuickMenu>
       )}

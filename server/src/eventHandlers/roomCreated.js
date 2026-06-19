@@ -5,10 +5,14 @@ import {trackEvent} from '../analytics.js';
  */
 function roomCreatedEventHandler(room, _, userId) {
   // Track room creation event
-  trackEvent('room_created', {
-    roomId: room.id,
-    timestamp: Date.now()
-  }, userId);
+  trackEvent(
+    'room_created',
+    {
+      roomId: room.id,
+      timestamp: Date.now()
+    },
+    userId
+  );
 
   return {
     id: room.id,

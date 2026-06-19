@@ -19,9 +19,9 @@ import {
  */
 const ActionLog = () => {
   const {t} = useContext(L10nContext);
-  const shown = useSelector(state => getCurrentSidebarIfAny(state) === SIDEBAR_ACTIONLOG);
+  const shown = useSelector((state) => getCurrentSidebarIfAny(state) === SIDEBAR_ACTIONLOG);
   const actionLog = useSelector(getActionLog);
-  
+
   return (
     <StyledActionLog $shown={shown}>
       <h4>{t('log')}</h4>

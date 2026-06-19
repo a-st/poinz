@@ -9,7 +9,7 @@ import {getOwnUserToken} from '../../state/users/usersSelectors';
 const RoomExportFileDownload = ({roomId}) => {
   const {t} = useContext(L10nContext);
   const userToken = useSelector(getOwnUserToken);
-  
+
   return (
     <button
       type="button"

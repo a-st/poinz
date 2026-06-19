@@ -25,21 +25,14 @@ import {StyledStoryTitle} from '../_styled';
 /**
  * One story in the (active) backlog.
  */
-const Story = ({
-  story,
-  isHighlighted,
-  onStoryClicked,
-  dndDragEnd,
-  dndMoveStory,
-  dndFindStory
-}) => {
+const Story = ({story, isHighlighted, onStoryClicked, dndDragEnd, dndMoveStory, dndFindStory}) => {
   const {t, format} = useContext(L10nContext);
   const dispatch = useDispatch();
-  
+
   const selectedStoryId = useSelector(getSelectedStoryId);
-  const isWaiting = useSelector(state => isThisStoryWaiting(state, story.id));
-  const isStoryEstimated = useSelector(state => isThisStoryEstimated(state, story.id));
-  
+  const isWaiting = useSelector((state) => isThisStoryWaiting(state, story.id));
+  const isStoryEstimated = useSelector((state) => isThisStoryEstimated(state, story.id));
+
   const isSelected = selectedStoryId === story.id;
   const hasConsensus = hasStoryConsensus(story);
 

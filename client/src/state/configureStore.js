@@ -1,15 +1,15 @@
-import {createStore, applyMiddleware, compose, bindActionCreators} from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware, compose, bindActionCreators } from 'redux';
+import { configureStore as configureStoreRtk } from '@reduxjs/toolkit'
 
 import rootReducer from './rootReducer';
 import hubFactory from './hub';
-import {eventReceived} from './actions/eventActions';
-import {locationChanged, onSocketConnect} from './actions/commandActions';
+import { eventReceived } from './actions/eventActions';
+import { locationChanged, onSocketConnect } from './actions/commandActions';
 import history from './getBrowserHistory';
 import appConfig from '../services/appConfig';
-import {getOwnUserId} from './users/usersSelectors';
-import {getRoomId} from './room/roomSelectors';
-import {registerReduxStore} from './clientSettingsStore';
+import { getOwnUserId } from './users/usersSelectors';
+import { getRoomId } from './room/roomSelectors';
+import { registerReduxStore } from './clientSettingsStore';
 
 /**
  * configures and sets up the redux store.
@@ -17,27 +17,21 @@ import {registerReduxStore} from './clientSettingsStore';
  * @param {object} [initialState]
  */
 export default function configureStore(initialState) {
-  const composeEnhancers =
-    (typeof window !== 'undefined' &&
-      appConfig.env === 'dev' &&
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-    compose;
-
   let hub;
 
-  const store = createStore(
-    rootReducer,
-    initialState,
-    composeEnhancers(
-      applyMiddleware(
-        // "sendCommand" will be available in redux action creators as third argument
-        thunkMiddleware.withExtraArgument((cmd) => hub.sendCommand(cmd))
-      )
-    )
-  );
+  const store = configureStoreRtk({
+    reducer: rootReducer,
+    preloadedState: initialState,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: (cmd) => hub.sendCommand(cmd),
+        },
+      }),
+  });
 
   const boundActions = bindActionCreators(
-    {locationChanged, eventReceived, onSocketConnect},
+    { locationChanged, eventReceived, onSocketConnect },
     store.dispatch
   );
 
@@ -62,7 +56,7 @@ export default function configureStore(initialState) {
   hub.onConnect(() => boundActions.onSocketConnect());
 
   // "sync" url changes to our redux store. if location changes -> store pathname in state
-  history.listen(({location}) => boundActions.locationChanged(location.pathname));
+  history.listen(({ location }) => boundActions.locationChanged(location.pathname));
 
   // and fire it once initially, so that the pathname on first page load is stored
   boundActions.locationChanged(history.location.pathname);

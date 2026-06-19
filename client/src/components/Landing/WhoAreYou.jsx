@@ -41,9 +41,11 @@ const WhoAreYou = () => {
   const join = () => {
     // username length minimum is 3 characters
     if (myUsername && myUsername.length > 2) {
-      dispatch(joinIfReady({
-        username: myUsername
-      }));
+      dispatch(
+        joinIfReady({
+          username: myUsername
+        })
+      );
     }
   };
 

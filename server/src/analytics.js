@@ -1,4 +1,4 @@
-import { PostHog } from 'posthog-node';
+import {PostHog} from 'posthog-node';
 import getLogger from './getLogger.js';
 
 const logger = getLogger('analytics');
@@ -21,8 +21,10 @@ if (POSTHOG_API_KEY) {
 }
 
 export function trackEvent(event, properties = {}, userId = null) {
-  if (!posthogClient) {return;}
-  
+  if (!posthogClient) {
+    return;
+  }
+
   try {
     posthogClient.capture({
       distinctId: userId || 'anonymous',
@@ -30,7 +32,7 @@ export function trackEvent(event, properties = {}, userId = null) {
       properties
     });
   } catch (error) {
-    logger.error('Failed to track event', { error: error.message, event });
+    logger.error('Failed to track event', {error: error.message, event});
   }
 }
 
@@ -39,11 +41,11 @@ export function shutdownAnalytics() {
     return new Promise((resolve) => {
       posthogClient.flush((error) => {
         if (error) {
-          logger.error('Error flushing PostHog events', { error: error.message });
+          logger.error('Error flushing PostHog events', {error: error.message});
         }
         resolve();
       });
     });
   }
   return Promise.resolve();
-} 
+}

@@ -1,9 +1,5 @@
-import isDate from 'date-fns/isDate';
-import format from 'date-fns/format';
-import localeDe from 'date-fns/locale/de';
-import localeEn from 'date-fns/locale/en-US';
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import formatDuration from 'date-fns/formatDuration';
+import { format, formatDistanceToNow, formatDuration, isDate } from 'date-fns';
+import { de, enUS } from 'date-fns/locale';
 import log from 'loglevel';
 
 /**
@@ -19,11 +15,11 @@ export function getLocalizedFormats(language = 'en') {
   };
 
   function timeAgo(dateOrTs) {
-    return formatDistanceToNow(normalizeDateOrTs(dateOrTs), {addSuffix: true, locale});
+    return formatDistanceToNow(normalizeDateOrTs(dateOrTs), { addSuffix: true, locale });
   }
 
   function formatDateTime(dateOrTs) {
-    return format(normalizeDateOrTs(dateOrTs), 'EEE MMM dd, HH:mm', {locale});
+    return format(normalizeDateOrTs(dateOrTs), 'EEE MMM dd, HH:mm', { locale });
   }
 
   function secondsToDaysHoursMinutes(inSeconds) {
@@ -33,7 +29,7 @@ export function getLocalizedFormats(language = 'en') {
     const hours = inHours % 24;
     const days = Math.floor(inHours / 24);
 
-    return formatDuration({days, hours, minutes}, {format: ['days', 'hours', 'minutes'], locale});
+    return formatDuration({ days, hours, minutes }, { format: ['days', 'hours', 'minutes'], locale });
   }
 }
 
@@ -63,10 +59,10 @@ function normalizeDateOrTs(dateOrTs) {
 function getLocale(language) {
   switch (language) {
     case 'de':
-      return localeDe;
+      return de;
     case 'en':
-      return localeEn;
+      return enUS;
     default:
-      return localeEn;
+      return enUS;
   }
 }

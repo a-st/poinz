@@ -25,15 +25,15 @@ const useEstimationSummary = () => {
   const cardConfig = useSelector(getCardConfigInOrder);
   const storyId = useSelector(getSelectedStoryId);
   const usersInRoomCount = useSelector(getUserCount);
-  const withConfidence = useSelector(state => state.room.withConfidence);
+  const withConfidence = useSelector((state) => state.room.withConfidence);
   const hasConsensus = useSelector(hasSelectedStoryConsensus);
   const consensusValue = useSelector(getSelectedStoryConsensusValue);
-  const matchingConsensusCard = useSelector(state => 
+  const matchingConsensusCard = useSelector((state) =>
     getMatchingCardConfig(state, getSelectedStoryConsensusValue(state))
   );
 
-  const summaries = useSelector(state => 
-    getEstimationSummary(estimations, cardConfig).map(summary => ({
+  const summaries = useSelector((state) =>
+    getEstimationSummary(estimations, cardConfig).map((summary) => ({
       ...summary,
       recommendationCard: getMatchingCardConfig(state, summary.recommendation)
     }))
@@ -61,7 +61,7 @@ const useEstimationSummary = () => {
 const EstimationSummary = () => {
   const {t} = useContext(L10nContext);
   const [includeUnsureEstimations, setIncludeUnsureEstimations] = useState(true);
-  
+
   const {
     storyId,
     usersInRoomCount,

@@ -40,8 +40,8 @@ export const DRAG_ITEM_TYPES = {
 const Board = ({roomId}) => {
   const dispatch = useDispatch();
   const isStorySelected = useSelector(isAStorySelected);
-  const sidebarShown = useSelector(state => !!getCurrentSidebarIfAny(state));
-  const matrixShown = useSelector(state => state.ui.matrixShown);
+  const sidebarShown = useSelector((state) => !!getCurrentSidebarIfAny(state));
+  const matrixShown = useSelector((state) => state.ui.matrixShown);
 
   const handleToggleMatrix = () => dispatch(toggleMatrix());
 

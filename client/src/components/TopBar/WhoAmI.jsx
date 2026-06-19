@@ -13,7 +13,7 @@ import {StyledDropdown} from '../common/_styled';
 const WhoAmI = () => {
   const roomId = useSelector(getRoomId);
   const user = useSelector(getOwnUser);
-  
+
   const roomUrl = `${window.location.origin}/${roomId}`;
   const whoamIRef = useRef(null);
   const [extended, setExtended] = useState(false);

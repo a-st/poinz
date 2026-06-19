@@ -21,7 +21,7 @@ const StoryEditForm = ({story}) => {
   const dispatch = useDispatch();
 
   const selectedStoryId = useSelector(getSelectedStoryId);
-  const isWaiting = useSelector(state => isThisStoryEditFormWaiting(state, story.id));
+  const isWaiting = useSelector((state) => isThisStoryEditFormWaiting(state, story.id));
   const isSelected = selectedStoryId === story.id;
 
   const [storyTitle, setStoryTitle] = useState(story.title);

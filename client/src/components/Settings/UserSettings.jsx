@@ -159,11 +159,7 @@ const UserSettings = () => {
         <h5>{t('spectator')}</h5>
         {t('spectatorInfo')}
 
-        <p
-          onClick={handleToggleExcluded}
-          className="clickable"
-          data-testid="excludedToggle"
-        >
+        <p onClick={handleToggleExcluded} className="clickable" data-testid="excludedToggle">
           <i className={excluded ? 'icon-check' : 'icon-check-empty'}></i> {t('markSpectator')}
         </p>
       </StyledSection>

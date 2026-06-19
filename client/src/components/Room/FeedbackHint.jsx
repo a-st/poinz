@@ -9,7 +9,7 @@ import {StyledFeedbackHint} from './_styled';
 
 const FeedbackHint = () => {
   const dispatch = useDispatch();
-  const hintsHidden = useSelector(state => state.ui.newUserHintHidden);
+  const hintsHidden = useSelector((state) => state.ui.newUserHintHidden);
   const handleHideNewUserHints = () => dispatch(hideNewUserHints());
 
   if (hintsHidden) {

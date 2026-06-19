@@ -29,7 +29,7 @@ import {
 const TopBar = () => {
   const {t} = useContext(L10nContext);
   const dispatch = useDispatch();
-  
+
   const backlogShown = useSelector(isBacklogShown);
   const sidebar = useSelector(getCurrentSidebarIfAny);
   const unseenError = useSelector(hasUnseenError);

@@ -31,9 +31,11 @@ const JoinRoomForm = () => {
   const [customRoomId, setCustomRoomId] = useState('');
 
   const onTriggerJoin = () => {
-    dispatch(joinIfReady({
-      roomId: customRoomId || uuid()
-    }));
+    dispatch(
+      joinIfReady({
+        roomId: customRoomId || uuid()
+      })
+    );
   };
 
   return (

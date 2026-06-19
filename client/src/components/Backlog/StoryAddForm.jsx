@@ -15,7 +15,7 @@ import {StyledAddForm} from './_styled';
 const StoryAddForm = () => {
   const {t} = useContext(L10nContext);
   const dispatch = useDispatch();
-  const waiting = useSelector(state => hasMatchingPendingCommand(state, 'addStory'));
+  const waiting = useSelector((state) => hasMatchingPendingCommand(state, 'addStory'));
 
   const [storyTitle, setStoryTitle] = useState('');
   const [storyDescr, setStoryDescr] = useState('');

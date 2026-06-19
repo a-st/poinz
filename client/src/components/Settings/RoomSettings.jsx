@@ -24,13 +24,13 @@ const RoomSettings = () => {
   const {t} = useContext(L10nContext);
   const dispatch = useDispatch();
 
-  const shown = useSelector(state => getCurrentSidebarIfAny(state) === SIDEBAR_SETTINGS);
-  const autoReveal = useSelector(state => state.room.autoReveal);
-  const withConfidence = useSelector(state => state.room.withConfidence);
-  const issueTrackingUrl = useSelector(state => state.room.issueTrackingUrl);
+  const shown = useSelector((state) => getCurrentSidebarIfAny(state) === SIDEBAR_SETTINGS);
+  const autoReveal = useSelector((state) => state.room.autoReveal);
+  const withConfidence = useSelector((state) => state.room.withConfidence);
+  const issueTrackingUrl = useSelector((state) => state.room.issueTrackingUrl);
   const cardConfig = useSelector(getCardConfigInOrder);
   const roomId = useSelector(getRoomId);
-  const passwordProtected = useSelector(state => state.room.passwordProtected);
+  const passwordProtected = useSelector((state) => state.room.passwordProtected);
 
   const [customCardConfigExpanded, setCustomCardConfigExpanded] = useState(true);
   React.useEffect(() => {
@@ -95,11 +95,7 @@ const RoomSettings = () => {
         <h5>{t('toggleAutoReveal')}</h5>
         {t('autoRevealInfo')}
 
-        <p
-          onClick={handleToggleAutoReveal}
-          className="clickable"
-          data-testid="toggleAutoReveal"
-        >
+        <p onClick={handleToggleAutoReveal} className="clickable" data-testid="toggleAutoReveal">
           <i className={autoReveal ? 'icon-check' : 'icon-check-empty'}></i> {t('autoReveal')}
         </p>
       </StyledSection>
@@ -161,11 +157,7 @@ const RoomSettings = () => {
         <h5>{t('confidence')}</h5>
         {t('confidenceInfo')}
 
-        <p
-          onClick={handleToggleConfidence}
-          className="clickable"
-          data-testid="toggleConfidence"
-        >
+        <p onClick={handleToggleConfidence} className="clickable" data-testid="toggleConfidence">
           <i className={withConfidence ? 'icon-check' : 'icon-check-empty'}></i>{' '}
           {t('toggleConfidence')}
         </p>

@@ -6,12 +6,16 @@ import {trackEvent} from '../analytics.js';
  */
 function joinedRoomEventHandler(room, eventPayload, userId) {
   // Track room join event
-  trackEvent('room_joined', {
-    roomId: room.id,
-    timestamp: Date.now(),
-    totalUsers: room.users.length + 1,
-    isNewRoom: room.users.length === 0
-  }, userId);
+  trackEvent(
+    'room_joined',
+    {
+      roomId: room.id,
+      timestamp: Date.now(),
+      totalUsers: room.users.length + 1,
+      isNewRoom: room.users.length === 0
+    },
+    userId
+  );
 
   return {
     ...room,

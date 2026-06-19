@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import getDayOfYear from 'date-fns/getDayOfYear';
-import set from 'date-fns/set';
-import sub from 'date-fns/sub';
-import add from 'date-fns/add';
+import {getDayOfYear, set, sub, add} from 'date-fns';
 
 /**
  * displays animated falling (like snowflakes) gifs

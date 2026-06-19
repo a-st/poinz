@@ -46,13 +46,15 @@ const EstimationArea = () => {
   }
 
   const selectedStory = useSelector(getSelectedStory);
-  const isExcluded = useSelector(state => getOwnUser(state).excluded);
+  const isExcluded = useSelector((state) => getOwnUser(state).excluded);
   const userCanCurrentlyEstimate = !selectedStory.revealed && !isExcluded;
   const hasConsensus = useSelector(hasSelectedStoryConsensus);
-  const consensusCardConfig = useSelector(state => getMatchingCardConfig(state, selectedStory.consensus));
+  const consensusCardConfig = useSelector((state) =>
+    getMatchingCardConfig(state, selectedStory.consensus)
+  );
   const applause = useSelector(hasApplause);
-  const hasNextStory = useSelector(state => !!findNextStoryIdToEstimate(state));
-  const activeEasterEgg = useSelector(state => state.ui.activeEasterEgg);
+  const hasNextStory = useSelector((state) => !!findNextStoryIdToEstimate(state));
+  const activeEasterEgg = useSelector((state) => state.ui.activeEasterEgg);
 
   const handleReveal = () => dispatch(reveal(selectedStory.id));
   const handleNewRound = () => dispatch(newEstimationRound(selectedStory.id));
@@ -82,11 +84,7 @@ const EstimationArea = () => {
 
       {!revealed && (
         <EstimationAreaButtons $alignment="space-between">
-          <button
-            type="button"
-            className="pure-button pure-button-primary"
-            onClick={handleReveal}
-          >
+          <button type="button" className="pure-button pure-button-primary" onClick={handleReveal}>
             {t('reveal')}
             <i className="icon-hand-paper-o button-icon-right"></i>
           </button>

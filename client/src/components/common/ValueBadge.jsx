@@ -6,7 +6,7 @@ import {StyledValueBadge} from './_styled';
 import {getMatchingCardConfig} from '../../state/room/roomSelectors';
 
 const ValueBadge = ({cardValue}) => {
-  const cardConfigItem = useSelector(state => getMatchingCardConfig(state, cardValue));
+  const cardConfigItem = useSelector((state) => getMatchingCardConfig(state, cardValue));
 
   return (
     <StyledValueBadge

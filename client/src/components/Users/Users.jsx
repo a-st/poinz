@@ -12,7 +12,7 @@ import {StyledUsers} from './_styled';
  */
 const Users = () => {
   const userArray = useSelector(getSortedUserArray);
-  
+
   return (
     <StyledUsers data-testid="users">
       {userArray.map((user) => (

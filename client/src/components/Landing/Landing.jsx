@@ -88,5 +88,4 @@ Loader.propTypes = {
   t: PropTypes.func
 };
 
-
 export default Landing;
