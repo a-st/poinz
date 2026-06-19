@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import Linkify from 'react-linkify';
+import Linkify from 'linkify-react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import {visit} from 'unist-util-visit';
