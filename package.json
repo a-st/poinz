@@ -30,7 +30,7 @@
     "fs-extra": "11.3.6",
     "glob": "^13.0.6",
     "npm-check-updates": "22.2.9",
-    "prettier": "3.8.4"
+    "prettier": "3.9.5"
   },
   "overrides": {
     "uuid": "^14.0.0"
